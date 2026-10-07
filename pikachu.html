@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="scss/header.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css" integrity="sha512-QeR2VH+lsBE5LSAe1Q5EnTBbe7XTBubt8dG93Y7gidSgdMCr8nVqKcfKAMyN96SV8KDbZVTDXChatu5G2KQGzg==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <title>Pikachu</title>
+</head>
+<body>
+        <header class = "header-pikachu">
+            <div class = "contain-pikachu">
+                 <button id = "introduce">Giới thiệu</button>
+                <button id = "suggest">Gợi ý</button>
+                <button id = "sound">Âm Thanh</button>
+                <button id = "play-again">Chơi lại</button>
+                <button id = "exit">Thoát</button>
+            </div>
+           
+        </header>
+        <main class = "pikachu-main">
+            <div class = "pikachu-left">
+                <div class = "game-mode">
+                    <button id = "beginner">Mới Bắt Đầu</button>
+                    <button id = "easy">Dễ</button>
+                    <button id = "medium">Trung Bình</button>
+                    <button id = "hard">Khó</button>
+                    <button id = "extreme-hard">Cực Khó</button>
+                    <button id = "nightmare">Ác Mộng</button>
+                    <button id = "swap">Đổi Vị Trí</button>
+                </div>
+            </div>
+            <div class = "pikachu-center">
+                <table id = "pikachu-board">
+                </table>
+            </div>
+            <div class = "pikachu-right">
+            </div>
+        </main>
+        <script src = "js/board.js"></script>
+        <script src = "js/killPokemon.js"></script>
+</body>
+</html>

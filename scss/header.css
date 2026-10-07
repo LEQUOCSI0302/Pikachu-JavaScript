@@ -1,0 +1,78 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  background-image: url("../assets/img/background-satoshi-champion.avif");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.header-pikachu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 10px;
+  margin-right: 1;
+}
+.header-pikachu .contain-pikachu {
+  padding: 15px 20px;
+  background-color: blue;
+  margin: 2px 2px;
+}
+.header-pikachu .contain-pikachu button {
+  padding: 10px 20px;
+  margin: 2px 2px;
+  font-size: 18px;
+  border-radius: 10px;
+  width: 150px;
+  height: 50px;
+}
+.pikachu-main {
+  display: flex;
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+}
+.pikachu-main .pikachu-left {
+  width: 20%;
+  display: flex;
+  justify-self: flex-end;
+  padding: 15px;
+}
+.pikachu-main .pikachu-left .game-mode {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  width: 100%;
+}
+.pikachu-main .pikachu-left .game-mode button {
+  padding: 10px 20px;
+  margin: 2px 2px;
+  font-size: 18px;
+  border-radius: 10px;
+  width: 80px;
+  height: 80px;
+}
+.pikachu-main .pikachu-center {
+  width: 60%;
+  height: 80%;
+  display: flex;
+  justify-content: center;
+}
+.pikachu-main .pikachu-center #pikachu-board {
+  border-collapse: collapse;
+}
+.pikachu-main .pikachu-center #pikachu-board .cell {
+  border: 1px solid black;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  background-color: white;
+  pointer-events: none;
+}
+.pikachu-main .pikachu-right {
+  width: 20%;
+}/*# sourceMappingURL=header.css.map */

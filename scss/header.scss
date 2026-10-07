@@ -1,0 +1,118 @@
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+body{
+    background-image: url("../assets/img/background-satoshi-champion.avif");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.header-pikachu{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 10px;
+    margin-right: 1;
+
+
+    .contain-pikachu{
+        padding: 15px 20px;
+        background-color: blue;
+        margin: 2px 2px;
+        button{
+            padding: 10px 20px;
+            margin: 2px 2px;
+            font-size: 18px;
+            border-radius: 10px;
+            width: 150px;
+            height: 50px;
+        }
+        #introduce{
+           
+        }
+        #suggest{
+        
+        }
+        #sound{
+           
+        }
+        #play-again{
+            
+        }
+        #exit{
+           
+        }
+    }
+   
+}
+
+.pikachu-main{
+    display: flex;
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+    .pikachu-left{
+        width: 20%;
+        display: flex;
+        justify-self: flex-end;
+        padding: 15px;
+        .game-mode{
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            width: 100%;
+            button{
+                padding: 10px 20px;
+                margin: 2px 2px;
+                font-size: 18px;
+                border-radius: 10px;
+                width: 80px;
+                height: 80px;
+            }
+            #beginner{
+
+            }
+            #easy{
+
+            }
+            #medium{
+
+            }
+            #hard{
+
+            }
+            #extreme-hard{
+
+            }
+            #nightmare{
+
+            }
+            #swap{
+           
+            }
+        }
+       
+    }
+    .pikachu-center{
+        width: 60%;
+        height: 80%;
+        display: flex;
+        justify-content: center;
+    
+        #pikachu-board{
+            border-collapse: collapse;
+            .cell{
+                border: 1px solid black;
+                width: 50px;
+                height: 50px;  
+                text-align: center;
+                background-color: white;
+                pointer-events: none;
+            }
+        }
+    }
+    .pikachu-right{
+        width: 20%;
+    }
+}
