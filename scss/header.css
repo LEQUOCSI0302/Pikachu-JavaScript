@@ -71,7 +71,10 @@ body {
   height: 50px;
   text-align: center;
   background-color: white;
-  pointer-events: none;
+  cursor: pointer;
+}
+.pikachu-main .pikachu-center #pikachu-board .cell .selected {
+  background-color: navy;
 }
 .pikachu-main .pikachu-right {
   width: 20%;

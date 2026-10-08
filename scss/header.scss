@@ -108,7 +108,10 @@ body{
                 height: 50px;  
                 text-align: center;
                 background-color: white;
-                pointer-events: none;
+                cursor: pointer;
+                .selected{
+                    background-color: navy;
+                }
             }
         }
     }

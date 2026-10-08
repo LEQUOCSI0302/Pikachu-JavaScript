@@ -1,14 +1,11 @@
 const row = 9
-const column = 9
+const column = 16
 let board = []
 let containImage = []
 const pikachuBoard = document.getElementById("pikachu-board")
 let soLuongAnh = 36
 
-/*
-*   Hàm này sẽ load tất cả ảnh vào mảng containImage.
-*   @{return} Trả về mảng chứa tất cả ảnh.
-*/
+
 function loadImage(){
     for(let i = 1; i<= soLuongAnh; i++){
         const img = new Image();
@@ -17,12 +14,7 @@ function loadImage(){
     }
 }
 loadImage();
-/*
-*   Hàm này nó sẽ trộn ảnh dựa trên công thức Fisher-Yates Shuffle.
-*   Lấy ngẫu nhiên 1 ảnh trong mảng containImage và gán vào 1 ô bất kỳ trong bảng.
-*   @{param} containImage: Mảng chứa tất cả ảnh.
-*   @{return} Trả về mảng 1 chiều chứa các ảnh đã được trộn ngẫu nhiên.
-*/
+
 function randomImage(containImage){
     const copyContainImage = [...containImage]
     for(let i = copyContainImage.length - 1; i > 0; i--){
@@ -51,15 +43,15 @@ function initBoard(){
    var image = []
    for (let i= 0; i< cell/2; i++){
         const imageId = i % containImage.length;
-        image.push(containImage[imageId]);
-        image.push(containImage[imageId]);
+        image.push(imageId+1);
+        image.push(imageId+1);
    }
-   board = randomImage(image);
+   var randomImages = randomImage(image);
 
    for(let i = 0; i < row; i++){
     var arr = [];
          for(let j = 0; j < column; j++){
-            arr.push(board[i * column + j]);
+            arr.push(randomImages[i * column + j]);
          }
          board[i] = arr;
    }
@@ -70,10 +62,11 @@ function renderBoard(){
     for(let i = 0; i<row;i++){
         for(let j = 0; j<column;j++){
             const cell = pikachuBoard.rows[i].cells[j];
-            const img = board[i][j].cloneNode(true);
-            cell.innerHTML = '';
-            cell.appendChild(img);
+                const img = document.createElement('img');
+                img.src = `./assets/pikachu_img/type${board[i][j]}.png`;
+                cell.innerHTML = '';
+                cell.appendChild(img);
+            }
         }
-    }
 }
 renderBoard();
