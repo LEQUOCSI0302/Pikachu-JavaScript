@@ -1,5 +1,5 @@
 const row = 9
-const column = 16
+const column= 16
 let board = []
 let containImage = []
 const pikachuBoard = document.getElementById("pikachu-board")

@@ -21,7 +21,9 @@ function killPokemon(click){
              getCell(firstClick.row, firstClick.column).classList.add('selected');
             return;
         }else{
-            removePokemon(firstClick, click);
+            if(checkPath(firstClick, click)){
+                removePokemon(firstClick, click);
+            }
         }
     }
 }
@@ -41,6 +43,72 @@ function removePokemon(click1, click2){
 
 
 
+}
+function checkPath(click1, click2){
+    var kiemtraPhanTu = true;
+    if(click1.row === click2.row){
+        if(click1.column < click2.column){
+            if(click1.column+1 === click2.column){
+            return true;
+            }
+            
+            for(var i = click1.column+1; i < click2.column; i++){
+                if(board[click1.row][i]){
+                    kiemtraPhanTu =  false;
+                }
+            }
+            if(kiemtraPhanTu){
+                return true;
+            }
+            
+        }else{
+            if(click1.column-1 === click2.column){
+            return true;
+            }
+            for(var i = click1.column -1; i > click2.column; i--){
+                if(board[click1.row][i]){
+                    kiemtraPhanTu = false;
+                }
+            }
+            if(kiemtraPhanTu){
+                return true;
+            }
+            
+        }
+        
+    }else if(click1.column === click2.column){
+        if(click1.row < click2.row){
+            if(click1.row+1 === click2.row){
+            return true;
+            }
+
+            for(var i = click1.row+1; i < click2.row; i++){
+                if(board[i][click1.column]){
+                    return false;
+                 }
+            }
+             if(kiemtraPhanTu){
+                return true;
+            }
+        }else{
+            if(click1.row-1 === click2.row){
+            return true;
+            }
+             for(var i = click1.row-1; i > click2.row; i--){
+                    if(board[i][click1.column]){
+                        return false;
+                    }
+            }
+             if(kiemtraPhanTu){
+                return true;
+            }
+        }
+    }
+    
+    return false;
+}
+function checkPathforL(click1, click2){
+    
 }
 
 function getCell(row, column){
