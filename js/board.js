@@ -39,7 +39,7 @@ createBoard();
 
 function initBoard(){
      board = [];
-   var cell = column * row;
+   var cell =column * row;
    var image = []
    for (let i= 0; i< cell/2; i++){
         const imageId = i % containImage.length;
@@ -47,14 +47,21 @@ function initBoard(){
         image.push(imageId+1);
    }
    var randomImages = randomImage(image);
-
-   for(let i = 0; i < row; i++){
-    var arr = [];
-         for(let j = 0; j < column; j++){
-            arr.push(randomImages[i * column + j]);
+       
+   for(let i = 0; i < row+2; i++){
+            var arr = [];
+         for(let j = 0; j < column+2; j++){
+            arr.push(0);
          }
-         board[i] = arr;
+         board.push(arr);
    }
+
+   for(let i = 0; i< row; i++){
+    for(let j = 0; j< column; j++){
+        board[i+1][j+1] = randomImages[i * column + j];
+    }
+   }
+
 }
 initBoard();
 
@@ -63,7 +70,7 @@ function renderBoard(){
         for(let j = 0; j<column;j++){
             const cell = pikachuBoard.rows[i].cells[j];
                 const img = document.createElement('img');
-                img.src = `./assets/pikachu_img/type${board[i][j]}.png`;
+                img.src = `./assets/pikachu_img/type${board[i+1][j+1]}.png`;
                 cell.innerHTML = '';
                 cell.appendChild(img);
             }
