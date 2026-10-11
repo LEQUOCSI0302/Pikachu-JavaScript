@@ -24,6 +24,10 @@
   width: 80px;
   height: 80px;
 }
+.pikachu-main .pikachu-left .game-mode button.active {
+  background-color: #ffd54f;
+  border: 2px solid #ff9800;
+}
 .pikachu-main .pikachu-center {
   width: 60%;
   height: 80%;
