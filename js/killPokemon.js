@@ -57,15 +57,62 @@ function rewardScore(scr){
 }
 
 function checkWin(){
+    var dsTronAnh = []
     if(soLuongPokemonConLai === 0){
         hienThiWin.classList.remove('an-class')
        scoreWin.innerHTML = `Điểm chiến thắng của bạn là: ${scoreC}`
        
-    }else if(soLuongPokemonConLai !== 0){
-        
+    }else{
+        if(!checkNuocDi()){
+            randomBoard();
+        }
     }
 }
 
+function checkNuocDi(){
+    nhomtheoId = {};
+    for(var i = 1; i <= row; i++){
+        for(var j = 1; j <= column; j++){
+            var id = board[i][j];
+            if(id !== 0){
+                if(!nhomtheoId[id]){
+                    nhomtheoId[id] = [];
+                }
+                nhomtheoId[id].push({row: i, column: j});
+            }
+        }
+    }
+    for(id in nhomtheoId){
+        var ds = nhomtheoId[id];
+        for(i = 0; i < ds.length; i++ ){
+            for(j = i+1; j < ds.length; j++){
+                if(checkPath(ds[i], ds[j]) || checkPathforL(ds[i],ds[j]) || checkPathforUandZ(ds[i],ds[j])){
+                    return true;
+                }
+            }
+        }
+    }
+    return false;
+}
+
+function randomBoard(){
+    dsToaDo = [];
+    dsId = [];
+    for(var i = 1; i <= row; i++){
+        for(var j = 1; j <= column; j++){
+            var id = board[i][j];
+            if(id !== 0){
+               dsId.push(id)
+                dsToaDo.push({row: i, column: j});
+            }
+        }
+    }
+    var dsDoiViTri = randomImage(dsId);
+    for(var i = 0; i < dsToaDo.length; i++){
+        board[dsToaDo[i].row][dsToaDo[i].column] = dsDoiViTri[i];
+    }
+    renderBoard();
+}
 
 function resetBoard(){
     initBoard();

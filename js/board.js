@@ -1,5 +1,5 @@
-const row = 9
-const column= 16
+const row = 5
+const column= 6
 let board = []
 let containImage = []
 const pikachuBoard = document.getElementById("pikachu-board")
@@ -68,10 +68,13 @@ function renderBoard(){
     for(let i = 0; i<row;i++){
         for(let j = 0; j<column;j++){
             const cell = pikachuBoard.rows[i].cells[j];
-                const img = document.createElement('img');
-                img.src = `./assets/pikachu_img/type${board[i+1][j+1]}.png`;
-                cell.innerHTML = '';
-                cell.appendChild(img);
+            cell.innerHTML = '';
+                if(board[i+1][j+1] !== 0){
+                    const img = document.createElement('img');
+                    img.src = `./assets/pikachu_img/type${board[i+1][j+1]}.png`;
+                    cell.innerHTML = '';
+                    cell.appendChild(img);
+                }
             }
         }
 }
