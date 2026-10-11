@@ -1,16 +1,19 @@
 let firstClick = null;
+var gameOver = false;
 const score = document.getElementById('score');
 var scoreC = 0;
 var soLuongPokemonConLai = (row * column);
 var playAgain = document.getElementsByClassName('play-again');
-var scoreWin = document.getElementById('score-win');
+var scoreAchieve = document.getElementById('score-achieve');
 var hienThiWin = document.getElementsByClassName('an-class')[0];
 function killPokemon(click){
     var check = board[click.row][click.column];
     if(check === 0){
         return;
     }
-  
+    if(gameOver){
+        return;
+    }
 
     if(firstClick === null){
         firstClick = click;
@@ -50,18 +53,25 @@ function removePokemon(click1, click2){
     rewardScore(scoreC);
     soLuongPokemonConLai -= 2;
     checkWin();
+
+    if(!daTinhGio){
+    daTinhGio = true;
+    batDauThoiGian();
+}
 }
 
 function rewardScore(scr){
-    score.innerHTML = `Đểm số của bạn: ${scr}`
+    score.innerHTML = `Điểm số của bạn: ${scr}`
 }
 
 function checkWin(){
     var dsTronAnh = []
     if(soLuongPokemonConLai === 0){
-        hienThiWin.classList.remove('an-class')
-       scoreWin.innerHTML = `Điểm chiến thắng của bạn là: ${scoreC}`
-       
+        
+    hienThiWin.classList.remove('an-class')
+       scoreAchieve.innerHTML = `Điểm chiến thắng của bạn là: ${scoreC}`
+       clearInterval(timeId);
+       gameOver = true;
     }else{
         if(!checkNuocDi()){
             randomBoard();
@@ -127,12 +137,17 @@ function resetBoard(){
     }
    }
     hienThiWin.classList.add('an-class')
-
-    
+   
+    daTinhGio = false;
+    clearInterval(timeId);
+    thoiGianConLai = tongThoiGian;
+    updateThoiGian();
+    hienThiLoss.classList.add('an-class-time');
+    gameOver = false;
 }
 
 for(var i = 0; i < playAgain.length; i++){
-        playAgain[i].addEventListener('click',resetBoard )
+    playAgain[i].addEventListener('click',resetBoard )
 }
 
 function checkPath(click1, click2){
