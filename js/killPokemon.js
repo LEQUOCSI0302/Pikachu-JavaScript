@@ -42,10 +42,28 @@ function removePokemon(click1, click2){
     td2.innerHTML = '';
     firstClick = null;
 
+    demSoO(cell);
+    checkWin(click1,click2)
+}
 
+function demSoO(cell){
+    return cell - 2;
+}
+
+function checkWin(click1, click2){
+    if(demSoO === 0){
+
+    }else if(demSoO !== 0){
+        if(!checkPath(click1, click2) || !checkPathforL(click1, click2) || !checkPathforUandZ(click1, click2)){
+
+        }
+    }
 }
 function checkPath(click1, click2){
     var kiemtraPhanTu = true;
+    if((click1.row !== click2.row) && (click1.column !== click2.column)){
+        kiemtraPhanTu =  false;
+    }
     if(click1.row === click2.row){
         if(click1.column < click2.column){
             if(click1.column+1 === click2.column){
@@ -100,11 +118,8 @@ function checkPath(click1, click2){
             
         }
     }
-     if(kiemtraPhanTu){
-        return true;
-    }
     
-    return false;
+    return kiemtraPhanTu;
 }
 function checkPathforL(click1, click2){
     var kiemtraPhanTuBenA = true;
@@ -150,19 +165,8 @@ function checkPathforL(click1, click2){
             }
         }
     }
-    if(kiemtraPhanTuBenA || kiemtraPhanTuBenB){
-        return true;
-    }
     
-    return false;
-}
-
-function CheckPathContain(){
-    var arrImageConLai = [];
-    
-}
-function checkWin(){
-
+    return kiemtraPhanTuBenA || kiemtraPhanTuBenB;
 }
 
 function checkPathforUandZ(click1, click2){
@@ -179,10 +183,7 @@ function checkPathforUandZ(click1, click2){
             kiemtraPhanTu  =  true;
         } 
     }
-    if(kiemtraPhanTu){
-        return true;
-    }
-    return false;
+    return kiemtraPhanTu;
 }
 
 function getCell(row, column){
