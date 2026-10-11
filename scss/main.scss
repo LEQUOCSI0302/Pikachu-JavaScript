@@ -1,0 +1,74 @@
+.pikachu-main{
+    display: flex;
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+    .pikachu-left{
+        width: 20%;
+        display: flex;
+        justify-self: flex-end;
+        padding: 15px;
+        .game-mode{
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            width: 100%;
+            button{
+                padding: 10px 20px;
+                margin: 2px 2px;
+                font-size: 18px;
+                border-radius: 10px;
+                width: 80px;
+                height: 80px;
+            }
+            #beginner{
+
+            }
+            #easy{
+
+            }
+            #medium{
+
+            }
+            #hard{
+
+            }
+            #extreme-hard{
+
+            }
+            #nightmare{
+
+            }
+            #swap{
+           
+            }
+        }
+       
+    }
+    .pikachu-center{
+        width: 60%;
+        height: 80%;
+        display: flex;
+        justify-content: center;
+    
+        #pikachu-board{
+            border-collapse: collapse;
+            .cell{
+                border: 1px solid black;
+                width: 50px;
+                height: 50px;  
+                text-align: center;
+                background-color: white;
+                cursor: pointer;
+                .selected{
+                    background-color: navy;
+                }
+            }
+        }
+    }
+    .pikachu-right{
+        width: 20%;
+
+    }
+    
+}

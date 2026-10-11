@@ -5,7 +5,6 @@ let containImage = []
 const pikachuBoard = document.getElementById("pikachu-board")
 let soLuongAnh = 36
 
-
 function loadImage(){
     for(let i = 1; i<= soLuongAnh; i++){
         const img = new Image();

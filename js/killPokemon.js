@@ -1,5 +1,10 @@
 let firstClick = null;
-
+const score = document.getElementById('score');
+var scoreC = 0;
+var soLuongPokemonConLai = (row * column);
+var playAgain = document.getElementsByClassName('play-again');
+var scoreWin = document.getElementById('score-win');
+var hienThiWin = document.getElementsByClassName('an-class')[0];
 function killPokemon(click){
     var check = board[click.row][click.column];
     if(check === 0){
@@ -41,24 +46,48 @@ function removePokemon(click1, click2){
     td1.innerHTML = '';
     td2.innerHTML = '';
     firstClick = null;
-
-    demSoO(cell);
-    checkWin(click1,click2)
+    scoreC += 5;
+    rewardScore(scoreC);
+    soLuongPokemonConLai -= 2;
+    checkWin();
 }
 
-function demSoO(cell){
-    return cell - 2;
+function rewardScore(scr){
+    score.innerHTML = `Đểm số của bạn: ${scr}`
 }
 
-function checkWin(click1, click2){
-    if(demSoO === 0){
-
-    }else if(demSoO !== 0){
-        if(!checkPath(click1, click2) || !checkPathforL(click1, click2) || !checkPathforUandZ(click1, click2)){
-
-        }
+function checkWin(){
+    if(soLuongPokemonConLai === 0){
+        hienThiWin.classList.remove('an-class')
+       scoreWin.innerHTML = `Điểm chiến thắng của bạn là: ${scoreC}`
+       
+    }else if(soLuongPokemonConLai !== 0){
+        
     }
 }
+
+
+function resetBoard(){
+    initBoard();
+    firstClick = null;
+    scoreC = 0;
+    rewardScore(scoreC);
+    soLuongPokemonConLai = row * column;
+    renderBoard()
+   for(var i = 0; i < row; i++){
+    for(var j = 0; j < column; j++){
+       pikachuBoard.rows[i].cells[j].classList.remove('selected');
+    }
+   }
+    hienThiWin.classList.add('an-class')
+
+    
+}
+
+for(var i = 0; i < playAgain.length; i++){
+        playAgain[i].addEventListener('click',resetBoard )
+}
+
 function checkPath(click1, click2){
     var kiemtraPhanTu = true;
     if((click1.row !== click2.row) && (click1.column !== click2.column)){

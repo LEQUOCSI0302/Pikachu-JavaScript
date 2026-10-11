@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="scss/header.css">
+    <link rel="stylesheet" href="scss/main.css">
+    <link rel="stylesheet" href="scss/alert.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css" integrity="sha512-QeR2VH+lsBE5LSAe1Q5EnTBbe7XTBubt8dG93Y7gidSgdMCr8nVqKcfKAMyN96SV8KDbZVTDXChatu5G2KQGzg==" crossorigin="anonymous" referrerpolicy="no-referrer">
     <title>Pikachu</title>
 </head>
@@ -13,7 +15,7 @@
                  <button id = "introduce">Giới thiệu</button>
                 <button id = "suggest">Gợi ý</button>
                 <button id = "sound">Âm Thanh</button>
-                <button id = "play-again">Chơi lại</button>
+                <button class = "play-again">Chơi lại</button>
                 <button id = "exit">Thoát</button>
             </div>
            
@@ -35,12 +37,22 @@
                 </table>
             </div>
             <div class = "pikachu-right">
-                <p>Điểm số của bạn: 100</p>
+                <p id = 'score'></p>
                 <div id = "bar-time">
 
                 </div>
             </div>
         </main>
+        <div  class = 'an-class'>
+            <div class = 'overlay' >
+                <div id = 'thongbao-win'>
+                    <span>Chúc mừng bạn đã chiến thắng</span>
+                    <p id = 'score-win'></p>
+                <button class = "play-again">Chơi lại</button>
+            </div>
+            </div>
+            
+        </div>
         <script src = "js/board.js"></script>
         <script src = "js/killPokemon.js"></script>
 </body>
