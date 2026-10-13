@@ -1,13 +1,13 @@
-var swap = document.getElementById('swap');
+let swap = document.getElementById('swap');
 swap.addEventListener('click',randomBoard);
-var tongThoiGian = 5;
-var thoiGianConLai = tongThoiGian;
-var timeId= null;
-var timeFill = document.getElementById('time-fill');
-var timecurrent = document.getElementById('set-time');
-var daTinhGio = false;
-var hienThiLoss = document.getElementsByClassName('an-class-time')[0];
-var scoreAchieveLoss = document.getElementById('score-achieve-loss');
+let tongThoiGian = 1800;
+let thoiGianConLai = tongThoiGian;
+let timeId= null;
+let timeFill = document.getElementById('time-fill');
+let timecurrent = document.getElementById('set-time');
+let daTinhGio = false;
+let hienThiLoss = document.getElementsByClassName('an-class-time')[0];
+let scoreAchieveLoss = document.getElementById('score-achieve-loss');
 function batDauThoiGian(){
     clearInterval(timeId);
     thoiGianConLai = tongThoiGian;
@@ -24,8 +24,8 @@ function batDauThoiGian(){
 }
 function updateThoiGian(){
      timeFill.style.height = (thoiGianConLai / tongThoiGian *100) + '%';
-     var phut = Math.floor(thoiGianConLai/60)
-     var giay = thoiGianConLai % 60;
+     let phut = Math.floor(thoiGianConLai/60)
+     let giay = thoiGianConLai % 60;
      timecurrent.innerHTML = phut + ':' + (giay <10 ?'0' :'')+ giay;
 }
 function hetGio(){

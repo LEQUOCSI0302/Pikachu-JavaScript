@@ -1,4 +1,4 @@
-var cheDoGame = {
+const cheDoGame = {
     'beginner': {},
     'easy': {},
     'medium': {},
@@ -6,14 +6,14 @@ var cheDoGame = {
     'extreme-hard': {},
     'nightmare': {}
 }
-var cheDoHienTai = 'beginner';
+let cheDoHienTai = 'beginner';
 
 function chonCheDo(ten){
     if(!cheDoGame[ten]) return;
     cheDoHienTai = ten;
     resetBoard();
 }
-var nutCheDo = document.querySelectorAll('.game-mode button:not(#swap)');
+let nutCheDo = document.querySelectorAll('.game-mode button:not(#swap)');
 nutCheDo.forEach(function(nut){
     nut.addEventListener('click', function(){
         nutCheDo.forEach(function(n){

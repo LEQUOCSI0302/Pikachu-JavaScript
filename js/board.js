@@ -25,9 +25,9 @@ function randomImage(containImage){
 
 function createBoard(){
     for (let i = 0; i < row; i++){
-        var tr = document.createElement("tr");
+        let tr = document.createElement("tr");
         for (let j = 0; j < column; j++){
-            var td = document.createElement("td");
+            let td = document.createElement("td");
             td.classList.add('cell');
             tr.appendChild(td);
         }
@@ -38,8 +38,8 @@ createBoard();
 
 function initBoard(){
      board = [];
-   var cell =column * row;
-   var image = []
+   let cell =column * row;
+   let image = []
    for (let i= 0; i< cell/2; i++){
         const imageId = i % containImage.length;
         image.push(imageId+1);
@@ -48,7 +48,7 @@ function initBoard(){
    var randomImages = randomImage(image);
        
    for(let i = 0; i < row+2; i++){
-            var arr = [];
+            let arr = [];
          for(let j = 0; j < column+2; j++){
             arr.push(0);
          }

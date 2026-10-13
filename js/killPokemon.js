@@ -1,22 +1,27 @@
 let firstClick = null;
-var gameOver = false;
+let gameOver = false;
 const score = document.getElementById('score');
-var scoreC = 0;
-var soLuongPokemonConLai = (row * column);
-var playAgain = document.getElementsByClassName('play-again');
-var scoreAchieve = document.getElementById('score-achieve');
-var hienThiWin = document.getElementsByClassName('an-class')[0];
+let scoreC = 0;
+let soLuongPokemonConLai = (row * column);
+let playAgain = document.getElementsByClassName('play-again');
+let scoreAchieve = document.getElementById('score-achieve');
+let hienThiWin = document.getElementsByClassName('an-class')[0];
+let hienThiOClick = false;
 function killPokemon(click){
-    var check = board[click.row][click.column];
+    let check = board[click.row][click.column];
     if(check === 0){
         return;
     }
     if(gameOver){
         return;
     }
+    if(hienThiOClick){
+        return;
+    }
 
     if(firstClick === null){
         firstClick = click;
+        
         getCell(firstClick.row, firstClick.column).classList.add('selected');
         return;
     }else{
@@ -31,7 +36,7 @@ function killPokemon(click){
             return;
         }else{
             if(checkPath(firstClick, click) || checkPathforL(firstClick,click) || checkPathforUandZ(firstClick,click)){
-                removePokemon(firstClick, click);
+                toMau2OClick(firstClick, click);
             }
         }
     }
@@ -40,8 +45,8 @@ function killPokemon(click){
 function removePokemon(click1, click2){
 
 
-    var td1 = getCell(click1.row, click1.column);
-    var td2 = getCell(click2.row, click2.column);
+    let td1 = getCell(click1.row, click1.column);
+    let td2 = getCell(click2.row, click2.column);
     td1.classList.remove('selected');
     td2.classList.remove('selected');
     board[click1.row][click1.column] = 0;
@@ -53,19 +58,31 @@ function removePokemon(click1, click2){
     rewardScore(scoreC);
     soLuongPokemonConLai -= 2;
     checkWin();
-
     if(!daTinhGio){
     daTinhGio = true;
     batDauThoiGian();
 }
 }
+function toMau2OClick(click1, click2){
+    hienThiOClick = true;
+    let tdA = getCell(click1.row, click1.column);
+    let tdB = getCell(click2.row, click2.column);
+    tdA.classList.add('matched');
+    tdB.classList.add('matched');
+    setTimeout(function(){
+        tdA.classList.remove('matched');
+        tdB.classList.remove('matched');
+    removePokemon(click1,click2);
+    hienThiOClick = false;
+    },480);
+}
+
 
 function rewardScore(scr){
     score.innerHTML = `Điểm số của bạn: ${scr}`
 }
 
 function checkWin(){
-    var dsTronAnh = []
     if(soLuongPokemonConLai === 0){
         
     hienThiWin.classList.remove('an-class')
@@ -81,9 +98,9 @@ function checkWin(){
 
 function checkNuocDi(){
     nhomtheoId = {};
-    for(var i = 1; i <= row; i++){
-        for(var j = 1; j <= column; j++){
-            var id = board[i][j];
+    for(let i = 1; i <= row; i++){
+        for(let j = 1; j <= column; j++){
+            let id = board[i][j];
             if(id !== 0){
                 if(!nhomtheoId[id]){
                     nhomtheoId[id] = [];
@@ -93,9 +110,9 @@ function checkNuocDi(){
         }
     }
     for(id in nhomtheoId){
-        var ds = nhomtheoId[id];
-        for(i = 0; i < ds.length; i++ ){
-            for(j = i+1; j < ds.length; j++){
+        let ds = nhomtheoId[id];
+        for(let i = 0; i < ds.length; i++ ){
+            for(let j = i+1; j < ds.length; j++){
                 if(checkPath(ds[i], ds[j]) || checkPathforL(ds[i],ds[j]) || checkPathforUandZ(ds[i],ds[j])){
                     return true;
                 }
@@ -108,17 +125,17 @@ function checkNuocDi(){
 function randomBoard(){
     dsToaDo = [];
     dsId = [];
-    for(var i = 1; i <= row; i++){
-        for(var j = 1; j <= column; j++){
-            var id = board[i][j];
+    for(let i = 1; i <= row; i++){
+        for(let j = 1; j <= column; j++){
+            let id = board[i][j];
             if(id !== 0){
                dsId.push(id)
                 dsToaDo.push({row: i, column: j});
             }
         }
     }
-    var dsDoiViTri = randomImage(dsId);
-    for(var i = 0; i < dsToaDo.length; i++){
+    let dsDoiViTri = randomImage(dsId);
+    for(let i = 0; i < dsToaDo.length; i++){
         board[dsToaDo[i].row][dsToaDo[i].column] = dsDoiViTri[i];
     }
     renderBoard();
@@ -131,8 +148,8 @@ function resetBoard(){
     rewardScore(scoreC);
     soLuongPokemonConLai = row * column;
     renderBoard()
-   for(var i = 0; i < row; i++){
-    for(var j = 0; j < column; j++){
+   for(let i = 0; i < row; i++){
+    for(let j = 0; j < column; j++){
        pikachuBoard.rows[i].cells[j].classList.remove('selected');
     }
    }
@@ -146,12 +163,12 @@ function resetBoard(){
     gameOver = false;
 }
 
-for(var i = 0; i < playAgain.length; i++){
+for(let i = 0; i < playAgain.length; i++){
     playAgain[i].addEventListener('click',resetBoard )
 }
 
 function checkPath(click1, click2){
-    var kiemtraPhanTu = true;
+    let kiemtraPhanTu = true;
     if((click1.row !== click2.row) && (click1.column !== click2.column)){
         kiemtraPhanTu =  false;
     }
@@ -174,7 +191,7 @@ function checkPath(click1, click2){
             if(click1.column-1 === click2.column){
             return true;
             }
-            for(var i = click1.column -1; i > click2.column; i--){
+            for(let i = click1.column -1; i > click2.column; i--){
                 if(board[click1.row][i]){
                     kiemtraPhanTu = false;
                 }
@@ -192,7 +209,7 @@ function checkPath(click1, click2){
             return true;
             }
 
-            for(var i = click1.row+1; i < click2.row; i++){
+            for(let i = click1.row+1; i < click2.row; i++){
                 if(board[i][click1.column]){
                     kiemtraPhanTu =  false;
                  }
@@ -201,7 +218,7 @@ function checkPath(click1, click2){
             if(click1.row-1 === click2.row){
             return true;
             }
-             for(var i = click1.row-1; i > click2.row; i--){
+             for(let i = click1.row-1; i > click2.row; i--){
                     if(board[i][click1.column]){
                         kiemtraPhanTu =  false;
                     }
@@ -213,10 +230,10 @@ function checkPath(click1, click2){
     return kiemtraPhanTu;
 }
 function checkPathforL(click1, click2){
-    var kiemtraPhanTuBenA = true;
-    var kiemtraPhanTuBenB = true;
+    let kiemtraPhanTuBenA = true;
+    let kiemtraPhanTuBenB = true;
     if(click1.row < click2.row){
-        for(var i = click1.row; i < click2.row;i++){
+        for(let i = click1.row; i < click2.row;i++){
             if(board[i][click2.column]){
                 kiemtraPhanTuBenA = false;
             }
@@ -225,7 +242,7 @@ function checkPathforL(click1, click2){
             }
         }
     }else{
-        for(var i = click1.row; i > click2.row;i--){
+        for(let i = click1.row; i > click2.row;i--){
             if(board[i][click2.column]){
                 kiemtraPhanTuBenA = false;
             }
@@ -236,7 +253,7 @@ function checkPathforL(click1, click2){
     }
     
     if(click1.column < click2.column){
-        for(var i = click1.column; i < click2.column;i++){
+        for(let i = click1.column; i < click2.column;i++){
             if(board[click2.row][i] ){
                 kiemtraPhanTuBenB = false;
                
@@ -246,7 +263,7 @@ function checkPathforL(click1, click2){
             }
         }
     }else{
-        for(var i = click1.column; i > click2.column;i--){
+        for(let i = click1.column; i > click2.column;i--){
             if(board[click2.row][i] ){
                  kiemtraPhanTuBenB = false;
                 
@@ -261,15 +278,15 @@ function checkPathforL(click1, click2){
 }
 
 function checkPathforUandZ(click1, click2){
-    var kiemtraPhanTu = false;
-    for(var i = 0; i < board.length; i++){
-        var p = {row: i, column: click2.column};
+    let kiemtraPhanTu = false;
+    for(let i = 0; i < board.length; i++){
+        let p = {row: i, column: click2.column};
         if(board[p.row][p.column] === 0 && (checkPathforL(click1,p) || checkPath(click1, p)) && checkPath(p,click2)){
             kiemtraPhanTu  =  true;
         }
     }
-    for(var j = 0; j < board[0].length;j++){
-         var p = {row: click2.row, column: j};
+    for(let j = 0; j < board[0].length;j++){
+         let p = {row: click2.row, column: j};
         if(board[p.row][p.column] === 0 && (checkPathforL(p,click1) || checkPath(p, click1)) && checkPath(p,click2)){
             kiemtraPhanTu  =  true;
         } 
@@ -281,13 +298,13 @@ function getCell(row, column){
     return pikachuBoard.rows[row-1].cells[column-1];
 }
 function clickPokemon(event){
-    var td = event.target.closest('td');
+    let td = event.target.closest('td');
 
     if(td === null){
         return;
     }
-    var rowtd = td.parentElement.rowIndex+1;
-    var columntd = td.cellIndex+1;
+    let rowtd = td.parentElement.rowIndex+1;
+    let columntd = td.cellIndex+1;
     killPokemon({row: rowtd, column: columntd});
 }
 pikachuBoard.addEventListener('click', clickPokemon)
