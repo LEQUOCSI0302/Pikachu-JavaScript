@@ -89,6 +89,9 @@
 .pikachu-main .pikachu-center #pikachu-board .cell.selected {
   background-color: #3266B1;
 }
+.pikachu-main .pikachu-center #pikachu-board .cell.duong-di {
+  background-color: #34A6DF;
+}
 .pikachu-main .pikachu-center #pikachu-board .cell.matched {
   background-color: #34A6DF;
 }

@@ -63,17 +63,34 @@ function removePokemon(click1, click2){
     batDauThoiGian();
 }
 }
+
 function toMau2OClick(click1, click2){
     hienThiOClick = true;
     let tdA = getCell(click1.row, click1.column);
     let tdB = getCell(click2.row, click2.column);
     tdA.classList.add('matched');
     tdB.classList.add('matched');
+
+    let dsTdDuongDi = [];
+    let dsGoc = timCacDiemGoc(click1,click2);
+    if(dsGoc){
+        for(let i = 0; i<dsGoc.length -1;i++){
+            lietkeO(dsGoc[i],dsGoc[i+1]).forEach(function(p){
+                if(p.row >= 1 && p.row <= row &&  p.column >= 1 &&  p.column <= column){
+                    let td = getCell(p.row, p.column);
+                    td.classList.add('duong-di');
+                    dsTdDuongDi.push(td);
+                }});
+            
+        
+        }
+    }
     setTimeout(function(){
         tdA.classList.remove('matched');
         tdB.classList.remove('matched');
     removePokemon(click1,click2);
     hienThiOClick = false;
+    dsTdDuongDi.forEach(function(td){ td.classList.remove('duong-di'); }); 
     },480);
 }
 
@@ -166,7 +183,55 @@ function resetBoard(){
 for(let i = 0; i < playAgain.length; i++){
     playAgain[i].addEventListener('click',resetBoard )
 }
+function timGocL(click1, click2){
+    let cacGoc = [{row: click1.row, column: click2.column}, {row: click2.row, column: click1.column}];
+    for(let i = 0; i < 2; i++){
+        let g = cacGoc[i];
+        if(board[g.row][g.column] && checkPath(click1,g)  &&  checkPath(g,click2)){
+            return g;
+        }
+    }
+    return null;
+}
 
+function timCacDiemGoc(click1, click2){
+    if(checkPath(click1,click2)) return [click1,click2];
+    let g = timGocL(click1,click2);
+    if(g) return [click1,g,click2];
+    for(let i = 0 ; i< board.length; i++){
+        let p = {row: i, column: click2.column};
+        if(board[p.row][p.column] !== 0 && !checkPath(p,click2)) continue;
+        if(checkPath(click1, p)) return [click1, p, click2];
+        if(checkPathforL(click1, p)){
+            let goc =  timGocL(click1, p);
+            if(goc) return [click1,goc,p,click2];
+        }
+    }
+     for(let i = 0 ; i< board[0].length; i++){
+        let p = {row: click2.row, column:i };
+        if(board[p.row][p.column] !== 0 && !checkPath(p,click2)) continue;
+        if(checkPath(click1, p)) return [click1, p, click2];
+        if(checkPathforL(click1, p)){
+            let goc =  timGocL(click1, p);
+            if(goc) return [click1,goc,p,click2];
+        }
+    }
+    return null;
+}
+
+function lietkeO(click1, click2){
+    let ds = [{row: click1.row,column: click1.column}];
+    let dr = Math.sign(click2.row - click1.row);
+    let dc = Math.sign(click2.column - click1.column);
+    let r =click1.row;
+    let c = click1.column;
+    while(r !== click2.row ||  c !== click2.column){
+        r += dr;
+        c += dc;
+        ds.push({row: r, column: c});
+    }
+    return ds;
+}
 function checkPath(click1, click2){
     let kiemtraPhanTu = true;
     if((click1.row !== click2.row) && (click1.column !== click2.column)){
