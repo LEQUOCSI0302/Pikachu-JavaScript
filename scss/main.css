@@ -79,21 +79,36 @@
   border-collapse: collapse;
 }
 .pikachu-main .pikachu-center #pikachu-board .cell {
-  border: 1px solid black;
   width: 50px;
   height: 50px;
   text-align: center;
-  background-color: white;
+  background-color: #92DAF9;
   cursor: pointer;
 }
 .pikachu-main .pikachu-center #pikachu-board .cell.selected {
   background-color: #3266B1;
+}
+.pikachu-main .pikachu-center #pikachu-board .cell.vien {
+  border: none;
+  background-color: transparent;
+}
+.pikachu-main .pikachu-center #pikachu-board .cell.style {
+  border: 2px solid;
+  border-radius: 10px;
+  border-color: #2242ef;
+}
+.pikachu-main .pikachu-center #pikachu-board .cell.an {
+  border: none;
+  background-color: transparent;
 }
 .pikachu-main .pikachu-center #pikachu-board .cell.duong-di {
   background-color: #34A6DF;
 }
 .pikachu-main .pikachu-center #pikachu-board .cell.matched {
   background-color: #34A6DF;
+}
+.pikachu-main .pikachu-center #pikachu-board .cell.suggest {
+  background-color: #2242ef;
 }
 .pikachu-main .pikachu-right {
   width: 20%;

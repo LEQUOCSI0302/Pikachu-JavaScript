@@ -8,6 +8,7 @@ let scoreAchieve = document.getElementById('score-achieve');
 let hienThiWin = document.getElementsByClassName('an-class')[0];
 let hienThiOClick = false;
 function killPokemon(click){
+    xoaBoGoiY();
     let check = board[click.row][click.column];
     if(check === 0){
         return;
@@ -30,6 +31,7 @@ function killPokemon(click){
             firstClick = null;
             return;
         }else if(board[firstClick.row][firstClick.column] !== board[click.row][click.column]){
+            phat(tiengError);
             getCell(firstClick.row, firstClick.column).classList.remove('selected');
              firstClick = click;
              getCell(firstClick.row, firstClick.column).classList.add('selected');
@@ -44,15 +46,14 @@ function killPokemon(click){
 
 function removePokemon(click1, click2){
 
-
+    phat(tiengCorrect);
     let td1 = getCell(click1.row, click1.column);
     let td2 = getCell(click2.row, click2.column);
     td1.classList.remove('selected');
     td2.classList.remove('selected');
     board[click1.row][click1.column] = 0;
     board[click2.row][click2.column] = 0;
-    td1.innerHTML = '';
-    td2.innerHTML = '';
+    renderBoard();
     firstClick = null;
     scoreC += 5;
     rewardScore(scoreC);
@@ -76,11 +77,11 @@ function toMau2OClick(click1, click2){
     if(dsGoc){
         for(let i = 0; i<dsGoc.length -1;i++){
             lietkeO(dsGoc[i],dsGoc[i+1]).forEach(function(p){
-                if(p.row >= 1 && p.row <= row &&  p.column >= 1 &&  p.column <= column){
+                
                     let td = getCell(p.row, p.column);
                     td.classList.add('duong-di');
                     dsTdDuongDi.push(td);
-                }});
+                });
             
         
         }
@@ -101,7 +102,7 @@ function rewardScore(scr){
 
 function checkWin(){
     if(soLuongPokemonConLai === 0){
-        
+        phat(tiengCongratulations);
     hienThiWin.classList.remove('an-class')
        scoreAchieve.innerHTML = `Điểm chiến thắng của bạn là: ${scoreC}`
        clearInterval(timeId);
@@ -140,6 +141,7 @@ function checkNuocDi(){
 }
 
 function randomBoard(){
+     xoaBoGoiY();
     dsToaDo = [];
     dsId = [];
     for(let i = 1; i <= row; i++){
@@ -159,6 +161,7 @@ function randomBoard(){
 }
 
 function resetBoard(){
+     xoaBoGoiY();
     initBoard();
     firstClick = null;
     scoreC = 0;
@@ -187,7 +190,7 @@ function timGocL(click1, click2){
     let cacGoc = [{row: click1.row, column: click2.column}, {row: click2.row, column: click1.column}];
     for(let i = 0; i < 2; i++){
         let g = cacGoc[i];
-        if(board[g.row][g.column] && checkPath(click1,g)  &&  checkPath(g,click2)){
+        if(board[g.row][g.column] === 0 && checkPath(click1,g)  &&  checkPath(g,click2)){
             return g;
         }
     }
@@ -200,7 +203,7 @@ function timCacDiemGoc(click1, click2){
     if(g) return [click1,g,click2];
     for(let i = 0 ; i< board.length; i++){
         let p = {row: i, column: click2.column};
-        if(board[p.row][p.column] !== 0 && !checkPath(p,click2)) continue;
+        if(board[p.row][p.column] !== 0 || !checkPath(p,click2)) continue;
         if(checkPath(click1, p)) return [click1, p, click2];
         if(checkPathforL(click1, p)){
             let goc =  timGocL(click1, p);
@@ -209,7 +212,7 @@ function timCacDiemGoc(click1, click2){
     }
      for(let i = 0 ; i< board[0].length; i++){
         let p = {row: click2.row, column:i };
-        if(board[p.row][p.column] !== 0 && !checkPath(p,click2)) continue;
+        if(board[p.row][p.column] !== 0 || !checkPath(p,click2)) continue;
         if(checkPath(click1, p)) return [click1, p, click2];
         if(checkPathforL(click1, p)){
             let goc =  timGocL(click1, p);
@@ -360,7 +363,7 @@ function checkPathforUandZ(click1, click2){
 }
 
 function getCell(row, column){
-    return pikachuBoard.rows[row-1].cells[column-1];
+    return pikachuBoard.rows[row].cells[column];
 }
 function clickPokemon(event){
     let td = event.target.closest('td');
@@ -368,8 +371,9 @@ function clickPokemon(event){
     if(td === null){
         return;
     }
-    let rowtd = td.parentElement.rowIndex+1;
-    let columntd = td.cellIndex+1;
+    phat(tiengClick);
+    let rowtd = td.parentElement.rowIndex;
+    let columntd = td.cellIndex;
     killPokemon({row: rowtd, column: columntd});
 }
 pikachuBoard.addEventListener('click', clickPokemon)
