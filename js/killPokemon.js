@@ -53,6 +53,9 @@ function removePokemon(click1, click2){
     td2.classList.remove('selected');
     board[click1.row][click1.column] = 0;
     board[click2.row][click2.column] = 0;
+    if(cheDoGame[cheDoHienTai].sauKhiAn){
+        cheDoGame[cheDoHienTai].sauKhiAn();
+    }
     renderBoard();
     firstClick = null;
     scoreC += 5;
